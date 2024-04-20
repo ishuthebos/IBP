@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Personal Website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
+  <style>
+    /* Reset styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Custom color theme */
+    :root {
+      --primary-color: #5e35b1;
+      --secondary-color: #ff6f00;
+      --text-color: #424242;
+      --background-color-light: #f5f5f5;
+      --background-color-dark: #000000;
+    }
+
+    /* Basic styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+      position: relative;
+      background-color: var(--background-color-light); /* Default light mode background */
+      transition: background-color 0.5s ease-in-out;
+      background-image: url('background-image.jpg'); /* Background image */
+      background-size: cover;
+      background-position: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 0 50% 50%;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      z-index: -1;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    header nav {
+      margin-top: 20px;
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    header nav ul li {
+      margin: 0 10px;
+    }
+
+    header nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.2em;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background-color: var(--secondary-color);
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    header nav ul li a:hover {
+      background-color: #ff5722;
+      transform: scale(1.05);
+    }
+
+    .section {
+      overflow: hidden;
+    }
+
+    .about-me-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 0;
+    }
+
+    .about-me-text {
+      flex: 1;
+      padding: 0 50px;
+    }
+
+    .about-me-text h2 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .about-me-text p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .about-me-image {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    .about-me-image img {
+      max-width: 200px;
+      width: 100%;
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .about-me-image img:hover {
+      transform: scale(1.1);
+    }
+
+    .project {
+      background: #fff;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+    }
+
+    .project h3 {
+      font-size: 2em;
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+
+    .project p {
+      color: var(--text-color);
+      margin-bottom: 20px;
+    }
+
+    .project a {
+      display: inline-block;
+      background: var(--secondary-color);
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .project a:hover {
+      background: #ff5722;
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    #contact-form {
+      background: #583a02;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    #contact-form label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    #contact-form input[type="text"],
+    #contact-form input[type="email"],
+    #contact-form textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #1d0101;
+      border-radius: 5px;
+      transition: border-color 0.3s ease-in-out;
+    }
+
+    #contact-form input[type="text"]:focus,
+    #contact-form input[type="email"]:focus,
+    #contact-form textarea:focus {
+      border-color: var(--primary-color);
+    }
+
+    #contact-form textarea {
+      height: 150px;
+    }
+
+    #contact-form button {
+      display: inline-block;
+      background: var(--secondary-color);
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    #contact-form button:hover {
+      background: #ff5722;
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .contact-info-item {
+      flex: 1;
+      text-align: center;
+    }
+
+    .contact-info-item i {
+      font-size: 2em;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+    }
+
+    .contact-info-item p {
+      font-size: 1.2em;
+    }
+
+    .social-links {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .social-links a {
+      display: inline-block;
+      margin: 0 10px;
+      color: var(--text-color);
+      font-size: 2em;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Dark mode button */
+    #dark-mode-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      color: var(--text-color);
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+    }
+
+    #dark-mode-button:hover {
+      color: var(--primary-color);
+    }
+
+    /* Music button */
+    #music-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    #music-button:hover {
+      background: #ff6f00;
+      transform: scale(1.1);
+    }
+
+    /* Dark mode */
+    body.dark-mode {
+      background-color: var(--background-color-dark);
+      color: #fff;
+    }
+
+    body.dark-mode header {
+      background: #111;
+    }
+
+    body.dark-mode header nav ul li a {
+      background-color: #333;
+    }
+
+    body.dark-mode .project {
+      background: #222;
+    }
+
+    body.dark-mode #contact-form {
+      background: #222;
+    }
+
+    /* Additional modern design elements */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(to right, #ff6f00, #ff9800);
+      color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .gradient-bg h3 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .gradient-bg p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #5e35b1;
+      transform: scale(1.05);
+    }
+    /* CSS for hover animations */
+    .social-buttons a {
+      display: inline-block;
+      margin-right: 10px;
+      text-decoration: none;
+      color: #070000;
+      font-size: 20px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .social-buttons a:hover {
+      transform: scale(1.2);
+    }
+
+    
+    /* CSS for scroll down indicator */
+    .scroll-down-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounceUpDown 2s infinite;
+    }
+
+    @keyframes bounceUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(10px);
+      }
+    }
+ /* CSS for the buttons */
+    .button-container {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      border-radius: 50px;
+      transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* CSS for unique button designs */
+    .button-gradient {
+      background: linear-gradient(45deg, #ff00cc, #3333ff);
+      color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-gradient:hover {
+      background: linear-gradient(45deg, #ff3399, #3366ff);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-hover {
+      background-color: #ffcc00;
+      color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-hover:hover {
+      background-color: #ff9900;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+      transform: scale(1.1);
+    }
+
+    .button-outline {
+      background-color: transparent;
+      color: #333;
+      border: 2px solid #333;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-outline:hover {
+      background-color: #333;
+      color: #fff;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+      transform: rotate(5deg);
+    }
+
+    .button-rounded {
+      border-radius: 30px;
+      background-color: #00cc66;
+      color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-rounded:hover {
+      background-color: #006600;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+      transform: rotate(-5deg);
+    }
+
+    .button-icon {
+      background-color: #ff9900;
+      color: #302020;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-icon:hover {
+      background-color: #ff5500;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+      transform: rotate(360deg);
+    }
+    .project-section {
+    padding: 100px 0;
+    text-align: center;
+  }
+
+  .project-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 50px;
+  }
+
+  .project-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .project-card {
+    max-width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .project-card .card-content {
+    padding: 20px;
+  }
+
+  .project-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .project-card p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+  }
+
+  .project-card a {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .project-card a:hover {
+    background: #ff5722;
+    transform: scale(1.05);
+  }
+  .footer {
+    background-color: var(--secondary-color);
+    color: #1e2e04;
+    padding: 30px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    z-index: -1;
+    border-radius: 50% 50% 0 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .legal-info {
+    flex: 1;
+    text-align: left;
+  }
+
+  .legal-info p {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .social-icons {
+    flex: 1;
+    text-align: right;
+  }
+
+  .social-icons a {
+    display: inline-block;
+    margin: 0 10px;
+    color: #22020e;
+    font-size: 24px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .social-icons a:hover {
+    transform: scale(1.1);
+  }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Welcome to My Website</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#portfolio">Explore</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+    
+    
+    <button id="dark-mode-button"><i class="fas fa-moon"></i></button>
+    <button id="music-button"><i class="fas fa-headphones"></i></button>
+  </header>
+  <div class="button-container">
+    <button class="button button-gradient">WEB DEVELOPEMENT  </button>
+    <button class="button button-hover">Javascript</button>
+    <button class="button button-hover">CSS</button>
+    <button class="button button-outline">Python </button>
+    <button class="button button-rounded">Html</button>
+    <button class="button button-outline">nord.js</button>
+   
+  </div>
+
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-me-container">
+        <div class="about-me-text">
+          <h2>About Us</h2>
+          <p>B"Welcome to my personal website! I'm Ishant Upadhyay, a passionate [your profession or field]. With a background in [mention relevant background or experience], I strive to create meaningful projects that make a positive impact. My journey in [your field] has been marked by curiosity, creativity, and a relentless pursuit of excellence..</p>
+          <p>More details about yourself...</p>
+          <a href="#" class="btn-primary">Read More</a>
+        </div>
+        <div class="about-me-image">
+          <img src="jyt.png" alt="Profile Picture">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="portfolio" class="section project-section">
+    <div class="container">
+      <h2>REVIEW OUR DEMO PROGRAMMING WORK </h2>
+      <div class="project-cards">
+        <div class="project-card">
+          <img src="jyt.png" alt="Project 1">
+          <div class="card-content">
+            <h3>ISHANT</h3>
+            <p>USE OF JAVA IN ANIAMTION</p>
+            <a href="#" class="btn-primary">View Details</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="jyt.png" alt="Project 2">
+          <div class="card-content">
+            <h3>DROPSHIP</h3>
+            <p>MODERN USE OF CSS HTML5 AND JAVA</p>
+            <a href="#" class="btn-primary">View Details</a>
+          </div>
+        </div>
+        <!-- Add more project cards here -->
+      </div>
+    </div>
+  </section>
+  <div class="button-container">
+    <button class="button button-gradient">Music </button>
+    <button class="button button-hover">MUSIC PRODUCTION</button>
+    <button class="button button-hover">BGM PRODUCER </button>
+    <button class="button button-outline">VOCAL EQUILESER </button>
+    
+   
+  </div>
+
+  
+      <!-- Add more cards here -->
+    </div>
+  </section>
+
+  <section id="contact" class="section gradient-bg">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>Feel free to contact us for any inquiries or collaborations.</p>
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <i class="fas fa-envelope"></i>
+          <p>Email: contact@example.com</p>
+        </div>
+        <div class="contact-info-item">
+          <i class="fas fa-phone"></i>
+          <p>Phone: +1234567890</p>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+      <form id="contact-form" action="#" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    const darkModeButton = document.getElementById('dark-mode-button');
+    const body = document.body;
+
+    darkModeButton.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+    });
+  </script>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="legal-info">
+        <p>&copy; 2024 My Personal Website. All rights reserved.</p>
+        <p>Privacy Policy | Terms of Service</p>
+      </div>
+      <div class="social-icons">
+        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
